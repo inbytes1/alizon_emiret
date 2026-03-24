@@ -9,43 +9,44 @@ interface ButterflyProps {
   color?: string
   delay?: number
 }
+//
 
-export function Butterfly({ 
-  className = "", 
-  style = {}, 
+export function Butterfly({
+  className = "",
+  style = {},
   size = 'md',
   color = '#87CEEB',
-  delay = 0 
+  delay = 0
 }: ButterflyProps) {
   const sizes = {
     sm: 24,
     md: 40,
     lg: 60
   }
-  
+
   const s = sizes[size]
-  
+
   return (
-    <svg 
-      viewBox="0 0 100 100" 
-      width={s} 
+    <svg
+      viewBox="0 0 100 100"
+      width={s}
       height={s}
       className={`${className}`}
-      style={{ 
-        ...style, 
+      style={{
+        ...style,
         animationDelay: `${delay}s`,
         filter: 'drop-shadow(0 2px 4px rgba(135, 206, 235, 0.3))'
       }}
     >
       {/* Left wing */}
-      <path 
-        d="M50 50 C30 30, 10 35, 15 55 C20 75, 40 70, 50 50" 
+      <path
+        d="M50 50 C30 30, 10 35, 15 55 C20 75, 40 70, 50 50"
         fill={color}
         opacity="0.8"
       >
-        <animate 
-          attributeName="d" 
-          dur="0.5s" 
+        <animate
+          attributeName="d"
+          dur="0.5s"
           repeatCount="indefinite"
           values="
             M50 50 C30 30, 10 35, 15 55 C20 75, 40 70, 50 50;
@@ -55,14 +56,14 @@ export function Butterfly({
         />
       </path>
       {/* Right wing */}
-      <path 
-        d="M50 50 C70 30, 90 35, 85 55 C80 75, 60 70, 50 50" 
+      <path
+        d="M50 50 C70 30, 90 35, 85 55 C80 75, 60 70, 50 50"
         fill={color}
         opacity="0.8"
       >
-        <animate 
-          attributeName="d" 
-          dur="0.5s" 
+        <animate
+          attributeName="d"
+          dur="0.5s"
           repeatCount="indefinite"
           values="
             M50 50 C70 30, 90 35, 85 55 C80 75, 60 70, 50 50;
@@ -72,14 +73,14 @@ export function Butterfly({
         />
       </path>
       {/* Upper left wing */}
-      <path 
-        d="M50 50 C35 25, 15 15, 20 35 C25 50, 45 48, 50 50" 
+      <path
+        d="M50 50 C35 25, 15 15, 20 35 C25 50, 45 48, 50 50"
         fill={color}
         opacity="0.6"
       >
-        <animate 
-          attributeName="d" 
-          dur="0.5s" 
+        <animate
+          attributeName="d"
+          dur="0.5s"
           repeatCount="indefinite"
           values="
             M50 50 C35 25, 15 15, 20 35 C25 50, 45 48, 50 50;
@@ -89,14 +90,14 @@ export function Butterfly({
         />
       </path>
       {/* Upper right wing */}
-      <path 
-        d="M50 50 C65 25, 85 15, 80 35 C75 50, 55 48, 50 50" 
+      <path
+        d="M50 50 C65 25, 85 15, 80 35 C75 50, 55 48, 50 50"
         fill={color}
         opacity="0.6"
       >
-        <animate 
-          attributeName="d" 
-          dur="0.5s" 
+        <animate
+          attributeName="d"
+          dur="0.5s"
           repeatCount="indefinite"
           values="
             M50 50 C65 25, 85 15, 80 35 C75 50, 55 48, 50 50;
@@ -116,13 +117,13 @@ export function Butterfly({
 
 export function FloatingButterflies() {
   const [mounted, setMounted] = useState(false)
-  
+
   useEffect(() => {
     setMounted(true)
   }, [])
-  
+
   if (!mounted) return null
-  
+
   const butterflies = [
     { top: '10%', left: '5%', size: 'sm' as const, delay: 0, color: '#87CEEB' },
     { top: '20%', right: '10%', size: 'md' as const, delay: 0.5, color: '#ADD8E6' },
@@ -135,7 +136,7 @@ export function FloatingButterflies() {
     { top: '15%', right: '3%', size: 'md' as const, delay: 1.2, color: '#B0E0E6' },
     { top: '90%', right: '15%', size: 'sm' as const, delay: 1.8, color: '#87CEEB' },
   ]
-  
+
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-10">
       {butterflies.map((butterfly, index) => (
@@ -150,8 +151,8 @@ export function FloatingButterflies() {
             animationDuration: `${4 + index * 0.5}s`
           }}
         >
-          <Butterfly 
-            size={butterfly.size} 
+          <Butterfly
+            size={butterfly.size}
             color={butterfly.color}
             delay={butterfly.delay}
           />
