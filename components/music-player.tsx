@@ -36,8 +36,14 @@ export function MusicPlayer() {
   
   return (
     <>
-      {/* Elemento de audio con tu canción conectada al botón */}
-      <audio ref={audioRef} src="/If Only.mp3" loop autoPlay preload="auto" />
+      {/* Elemento de audio con tu canción conectada al botón revisada para GitHub Pages */}
+      <audio 
+        ref={audioRef} 
+        src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/If Only.mp3`} 
+        loop 
+        autoPlay 
+        preload="auto" 
+      />
       
       <button
         onClick={togglePlay}
