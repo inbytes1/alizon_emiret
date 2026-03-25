@@ -7,25 +7,37 @@ export function MusicPlayer() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [hasInteracted, setHasInteracted] = useState(false)
   
-  // You can add a music URL here if needed
-  // const audioRef = useRef<HTMLAudioElement>(null)
+  const audioRef = useRef<HTMLAudioElement>(null)
+
+  useEffect(() => {
+    // Intentar reproducir automáticamente al cargar la página
+    if (audioRef.current) {
+      const playPromise = audioRef.current.play()
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => setIsPlaying(true))
+          .catch(() => setIsPlaying(false)) // Falla si el navegador bloquea el autoplay
+      }
+    }
+  }, [])
   
   const togglePlay = () => {
     setHasInteracted(true)
-    setIsPlaying(!isPlaying)
-    // if (audioRef.current) {
-    //   if (isPlaying) {
-    //     audioRef.current.pause()
-    //   } else {
-    //     audioRef.current.play()
-    //   }
-    // }
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause()
+        setIsPlaying(false)
+      } else {
+        audioRef.current.play()
+        setIsPlaying(true)
+      }
+    }
   }
   
   return (
     <>
-      {/* Optional: Add audio element if you have music */}
-      {/* <audio ref={audioRef} src="/music/background.mp3" loop /> */}
+      {/* Elemento de audio con tu canción conectada al botón */}
+      <audio ref={audioRef} src="/If Only.mp3" loop autoPlay preload="auto" />
       
       <button
         onClick={togglePlay}
